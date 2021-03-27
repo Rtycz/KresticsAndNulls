@@ -45,12 +45,7 @@ namespace KresticsAndNulls {
             createButtons(3);            
         }
 
-        private void Form1_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-            
-        }
-
+        // Поцедура для всех динамически создаваемых кнопок
         private void ButtonOnClick(object sender, EventArgs eventArgs)
         {
             var button = (Button)sender;
@@ -119,63 +114,25 @@ namespace KresticsAndNulls {
             
 
         }
-        private void ClearTable(object sender, EventArgs eventArgs)
-        {
-            
-        }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = CreateGraphics();
-            Brush brr = Brushes.Red;
-            Font fnt = new Font("Arial", 20);
-            string s = n.ToString();
-            g.FillRectangle(Brushes.SkyBlue, 450, 350, 30,30);
-            g.DrawString(s, fnt, brr, 450, 350);
         }
 
         private void Play_Click(object sender, EventArgs e)
         {
-            int left = 0;
-            int top = 0;
             count = 1;
-            turn = true;
+            turn = true;            
+            int new_n = Convert.ToInt32(textBox1.Text);
 
-            if ((n >= 3) && (n <= 5))
-            {
-                for (int i = 0; i < n; i++)
-                {
-                    for (int j = 0; j < n; j++)
-                    {
+            if ((new_n >= 3) && (new_n <= 5)) {
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
                         panel1.Controls.Remove(btn[i, j]);
                     }
                 }
-
-
-                n = Convert.ToInt32(textBox1.Text);
-
-                btn = new Button[n, n];
-                int step = (int)420 / n;
-
-                for (int i = 0; i < n; i++)
-                {
-                    for (int j = 0; j < n; j++)
-                    {
-                        btn[i, j] = new Button();
-                        btn[i, j].Parent = panel1;
-                        btn[i, j].Left = left + step * j;
-                        btn[i, j].Top = top;
-                        btn[i, j].Width = step;
-                        btn[i, j].Height = step;
-                        //btn[i, j].Name = "btn" + (int)(i * n + j);
-                        btn[i, j].Click += ButtonOnClick;
-
-                        //panel1.Controls.Add(btn[i, j]);
-                        //top += button.Height + 2;
-                    }
-                    left = 0;
-                    top += step;
-                }
+                n = new_n;
+                createButtons(n);
             }
             else { MessageBox.Show("Введите нормальное число!"); }
         }
