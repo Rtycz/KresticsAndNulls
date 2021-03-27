@@ -1,0 +1,19 @@
+D:\!Windows\4 Course\C Sharp\KresticsAndNulls\bin\Debug\KresticsAndNulls.exe.config
+D:\!Windows\4 Course\C Sharp\KresticsAndNulls\bin\Debug\KresticsAndNulls.exe
+D:\!Windows\4 Course\C Sharp\KresticsAndNulls\bin\Debug\KresticsAndNulls.pdb
+D:\!Windows\4 Course\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.csprojAssemblyReference.cache
+D:\!Windows\4 Course\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.Properties.Resources.resources
+D:\!Windows\4 Course\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.csproj.GenerateResource.cache
+D:\!Windows\4 Course\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.csproj.CoreCompileInputs.cache
+D:\!Windows\4 Course\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.exe
+D:\!Windows\4 Course\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.pdb
+C:\Developing\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.csprojAssemblyReference.cache
+C:\Developing\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.Form1.resources
+C:\Developing\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.Properties.Resources.resources
+C:\Developing\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.csproj.GenerateResource.cache
+C:\Developing\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.csproj.CoreCompileInputs.cache
+C:\Developing\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.exe
+C:\Developing\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.pdb
+C:\Developing\C Sharp\KresticsAndNulls\bin\Debug\KresticsAndNulls.exe.config
+C:\Developing\C Sharp\KresticsAndNulls\bin\Debug\KresticsAndNulls.exe
+C:\Developing\C Sharp\KresticsAndNulls\bin\Debug\KresticsAndNulls.pdb
