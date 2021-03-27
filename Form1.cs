@@ -12,7 +12,6 @@ namespace KresticsAndNulls {
     public partial class Form1 : Form {
         bool turn = true;   // Чей ход, 0 - нолик, 1 - крестик
         int n = 3;          // Размерность
-        int count = 1; 
 
         Button [,] btn;
 
@@ -42,7 +41,29 @@ namespace KresticsAndNulls {
 
         public Form1() {
             InitializeComponent();
-            createButtons(3);            
+            regame();
+        }
+
+        private void clearButtons()
+        {
+            // TODO - Не работает ничья + Почему-то после победы 0 первым ходит 0, хотя не должен + ошибка после след победы крестиков
+            if (btn == null)
+                return;
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    panel1.Controls.Remove(btn[i, j]);
+                }
+            }
+        }
+
+        private void regame()
+        {
+            turn = true;
+            clearButtons();
+            createButtons(3);
         }
 
         // Поцедура для всех динамически создаваемых кнопок
@@ -64,10 +85,12 @@ namespace KresticsAndNulls {
                 button.Image = Img;
                 button.Tag = 1;
                 button.Refresh();
-                check();
-                turn = !turn;
-                System.Threading.Thread.Sleep(300);
-                bot_click();
+                if (!check())
+                {
+                    turn = !turn;
+                    System.Threading.Thread.Sleep(300);
+                    bot_click();
+                }
             }
         }
 
@@ -77,16 +100,11 @@ namespace KresticsAndNulls {
 
         private void Play_Click(object sender, EventArgs e)
         {
-            count = 1;
             turn = true;            
             int new_n = Convert.ToInt32(textBox1.Text);
 
             if ((new_n >= 3) && (new_n <= 5)) {
-                for (int i = 0; i < n; i++) {
-                    for (int j = 0; j < n; j++) {
-                        panel1.Controls.Remove(btn[i, j]);
-                    }
-                }
+                clearButtons();
                 n = new_n;
                 createButtons(n);
             }
@@ -97,11 +115,8 @@ namespace KresticsAndNulls {
         private void bot_click()
         {
             Random Rand = new Random();
-            count++;
             Image Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o3.png");
-            int xx = 0;
-            while (xx < 1000) {
-                xx++;
+            while (true) {
                 //MessageBox.Show();
                 int x = Rand.Next(0, n);
                 int y = Rand.Next(0, n);
@@ -126,31 +141,109 @@ namespace KresticsAndNulls {
 
                     but.Image = Img;
                     but.Tag = 2;
-                    check();
-                    turn = !turn;
-                    break;
+                    // Refresh?
+                    if (!check())
+                    {
+                        turn = !turn;
+                        break;
+                    }
                 }
             }
         }
 
         // Проверка на победу, но не работает
-        private void check()
+        private bool check()
         {
+            // 1 - крестик(Человек), 2 - нолик(бот) 
+            bool horiz_win = check_horiz_win();
+            bool vertic_win = check_vertic_win();
+            bool diag_win = check_diag_win();
 
-            if (((btn[0, 0].Tag == btn[0, 1].Tag) && (btn[0, 1].Tag == btn[0, 2].Tag) && ((int)btn[0, 0].Tag != 0)) ||
-                ((btn[1, 0].Tag == btn[1, 1].Tag) && (btn[1, 1].Tag == btn[1, 2].Tag) && ((int)btn[1, 0].Tag != 0)) ||
-                ((btn[2, 0].Tag == btn[2, 1].Tag) && (btn[2, 1].Tag == btn[2, 2].Tag) && ((int)btn[2, 0].Tag != 0)))
+            if (horiz_win || vertic_win || diag_win)
+            {
                 if (turn)
-                {
-                    MessageBox.Show("Победа крестиков");
-                }
+                    MessageBox.Show("Победа крестиков!");
                 else
-                {
-                    MessageBox.Show("Победа ноликов");
-                }
-            // TODO - прописать прикрещаение дальнейших действий в этой игре и перевызов новой игры
-
+                    MessageBox.Show("Победа ноликов!");
+                regame();
+                return true;
+            }
+            return false;
         }
 
+        private bool check_horiz_win()
+        {
+            bool horiz_win = false;
+            int cur_tag = -1;
+            for (int i = 0; i < n; i++)
+            {
+                bool is_horiz_win = true;
+                cur_tag = (int)btn[i, 0].Tag;
+                if (cur_tag == 0)
+                    continue;
+                for (int j = 1; j < n; j++)
+                    if ((int)btn[i, j].Tag != cur_tag)
+                    {
+                        is_horiz_win = false;
+                        break;
+                    }
+                horiz_win = horiz_win || is_horiz_win;
+            }
+            return horiz_win;
+        }
+
+        private bool check_vertic_win()
+        {
+            bool vertic_win = false;
+            int cur_tag = -1;
+            for (int i = 0; i < n; i++)
+            {
+                bool is_vertic_win = true;
+                cur_tag = (int) btn[0, i].Tag;
+                if (cur_tag == 0)
+                    continue;
+                for (int j = 1; j < n; j++)
+                    if ((int) btn[j, i].Tag != cur_tag)
+                    {
+                        is_vertic_win = false;
+                        break;
+                    }
+                vertic_win = vertic_win || is_vertic_win;
+            }
+            return vertic_win;
+        }
+
+
+        private bool check_diag_win()
+        {
+            bool diag_win = false;
+            int cur_tag = (int)btn[0, 0].Tag;
+            if  (cur_tag != 0) {
+                diag_win = true;
+                for (int i = 1; i < n; i++) {
+                    if ((int) btn[i, i].Tag != cur_tag)
+                    {
+                        diag_win = false;
+                        break;
+                    }
+                }
+            }
+            if (diag_win)
+                return true;
+
+            cur_tag = (int)btn[0, n-1].Tag;
+            if (cur_tag != 0) {
+                diag_win = true;
+                for (int i = 1; i < n; i++)
+                {
+                    if ((int)btn[i, n-i-1].Tag != cur_tag)
+                    {
+                        diag_win = false;
+                        break;
+                    }
+                }
+            }
+            return diag_win;
+        }
     }
 }
