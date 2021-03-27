@@ -51,68 +51,24 @@ namespace KresticsAndNulls {
             var button = (Button)sender;
             Image Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o3.png");
 
-            if (button.Image == null)
-            {
-                //MessageBox.Show("Прощай " + button.Name);
-                if (n == 3)
-                {
-                    if (turn)
-                    { Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/x3.png"); }
-                    else
-                    { Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o3.png"); }
-                }
+            if (button.Image == null) {
+                if (n == 3) 
+                    Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/x3.png");
 
                 if (n == 4)
-                {
-                    if (turn)
-                    { Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/x4.png"); }
-                    else
-                    { Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o4.png"); }
-                }
+                    Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/x4.png");
 
                 if (n == 5)
-                {
-                    if (turn)
-                    { Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/x5.png"); }
-                    else
-                    { Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o5.png"); }
-                }
+                    Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/x5.png");
 
                 button.Image = Img;
                 button.Tag = 1;
+                button.Refresh();
                 check();
                 turn = !turn;
-
-                if (n == 3)
-                {
-                    if (count <= 4)
-                    {
-                        bot_click();
-                    }
-                }
-
-                if (n == 4)
-                {
-                    if (count <=8)
-                    {
-                        bot_click();
-                    }
-                }
-
-                if (n == 5)
-                {
-                    if (count <= 12)
-                    {
-                        bot_click();
-                    }
-                }
-                
-                //button.Dispose();
+                System.Threading.Thread.Sleep(300);
+                bot_click();
             }
-
-            
-            
-
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -137,65 +93,47 @@ namespace KresticsAndNulls {
             else { MessageBox.Show("Введите нормальное число!"); }
         }
             
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                //n = Convert.ToInt32(textBox1.Text);
-            }
-            catch
-            {
-                MessageBox.Show("Проверьте правильность ввода чисел!");
-            }
-        }
-
-        private void Play_Paint(object sender, PaintEventArgs e)
-        {
-            
-        }
-
+        // Логика бота
         private void bot_click()
         {
             Random Rand = new Random();
             count++;
             Image Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o3.png");
-            while (true)
-            {
-                if (!turn)
+            int xx = 0;
+            while (xx < 1000) {
+                xx++;
+                //MessageBox.Show();
+                int x = Rand.Next(0, n);
+                int y = Rand.Next(0, n);
+                Button but = btn[x,y];
+
+                if (but.Image == null)
                 {
-                    //MessageBox.Show();
-                    int x = Rand.Next(0, n);
-                    int y = Rand.Next(0, n);
-                    Button but = btn[x,y];
-
-                    if (but.Image == null)
+                    if (n == 3)
                     {
-                        if (n == 3)
-                        {
-                            Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o3.png");
-                        }
-
-                        if (n == 4)
-                        {
-                           Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o4.png"); 
-                        }
-
-                        if (n == 5)
-                        {
-                           Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o5.png");
-                        }
-
-                        but.Image = Img;
-                        but.Tag = 2;
-                        check();
-                        turn = !turn;
-                        break;
+                        Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o3.png");
                     }
+
+                    if (n == 4)
+                    {
+                        Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o4.png"); 
+                    }
+
+                    if (n == 5)
+                    {
+                        Img = Image.FromFile("C://Developing/C Sharp/KresticsAndNulls/src/o5.png");
+                    }
+
+                    but.Image = Img;
+                    but.Tag = 2;
+                    check();
+                    turn = !turn;
+                    break;
                 }
             }
         }
 
+        // Проверка на победу, но не работает
         private void check()
         {
 
@@ -210,6 +148,7 @@ namespace KresticsAndNulls {
                 {
                     MessageBox.Show("Победа ноликов");
                 }
+            // TODO - прописать прикрещаение дальнейших действий в этой игре и перевызов новой игры
 
         }
 

@@ -51,7 +51,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Play
             // 
@@ -64,7 +63,6 @@
             this.Play.Text = "Play";
             this.Play.UseVisualStyleBackColor = false;
             this.Play.Click += new System.EventHandler(this.Play_Click);
-            this.Play.Paint += new System.Windows.Forms.PaintEventHandler(this.Play_Paint);
             // 
             // panel1
             // 
