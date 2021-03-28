@@ -124,34 +124,25 @@ namespace KresticsAndNulls {
                 int y = Rand.Next(0, n);
                 Button but = btn[x,y];
 
-                if (but.Image == null)
-                {
+                if (but.Image == null) {
                     if (n == 3)
-                    {
                         Img = Image.FromFile("../../src/o3.png");
-                    }
 
                     if (n == 4)
-                    {
                         Img = Image.FromFile("../../src/o4.png"); 
-                    }
 
                     if (n == 5)
-                    {
                         Img = Image.FromFile("../../src/o5.png");
-                    }
 
                     but.Image = Img;
                     but.Tag = 2;
-                    // Refresh?
+                    but.Refresh();
                     count++;
-                    if (!check())
-                    {
-                        turn = !turn;
-                        break;
-                    }
+                    break;
                 }
             }
+            if (!check())
+                turn = !turn;
         }
 
         // Проверка на победу, но не работает
