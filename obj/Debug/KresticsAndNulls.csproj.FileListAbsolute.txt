@@ -17,3 +17,13 @@ C:\Developing\C Sharp\KresticsAndNulls\obj\Debug\KresticsAndNulls.pdb
 C:\Developing\C Sharp\KresticsAndNulls\bin\Debug\KresticsAndNulls.exe.config
 C:\Developing\C Sharp\KresticsAndNulls\bin\Debug\KresticsAndNulls.exe
 C:\Developing\C Sharp\KresticsAndNulls\bin\Debug\KresticsAndNulls.pdb
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\bin\Debug\KresticsAndNulls.exe.config
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\bin\Debug\KresticsAndNulls.exe
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\bin\Debug\KresticsAndNulls.pdb
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\obj\Debug\KresticsAndNulls.csprojAssemblyReference.cache
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\obj\Debug\KresticsAndNulls.Form1.resources
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\obj\Debug\KresticsAndNulls.Properties.Resources.resources
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\obj\Debug\KresticsAndNulls.csproj.GenerateResource.cache
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\obj\Debug\KresticsAndNulls.csproj.CoreCompileInputs.cache
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\obj\Debug\KresticsAndNulls.exe
+C:\Химшиашвили\Учеба\C#\KresticsAndNulls\obj\Debug\KresticsAndNulls.pdb
