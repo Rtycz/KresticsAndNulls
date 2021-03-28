@@ -14,18 +14,15 @@ namespace KresticsAndNulls {
         int n = 3;          // Размерность
         int count = 0;
 
-        Button [,] btn;
+        Button[,] btn;
 
-        private void createButtons(int m)
-        {
+        private void createButtons(int m) {
             int left = 0;
             int top = 0;
             btn = new Button[n, n];
             int step = this.panel1.Width / n;
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
                     btn[i, j] = new Button();
                     btn[i, j].Left = left + step * j;
                     btn[i, j].Top = top;
@@ -45,23 +42,18 @@ namespace KresticsAndNulls {
             regame();
         }
 
-        private void clearButtons()
-        {
-            // TODO - Не работает ничья + Почему-то после победы 0 первым ходит 0, хотя не должен + ошибка после след победы крестиков
+        private void clearButtons() {
             if (btn == null)
                 return;
 
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
                     panel1.Controls.Remove(btn[i, j]);
                 }
             }
         }
 
-        private void regame()
-        {
+        private void regame() {
             turn = true;
             count = 0;
             clearButtons();
@@ -69,13 +61,12 @@ namespace KresticsAndNulls {
         }
 
         // Поцедура для всех динамически создаваемых кнопок
-        private void ButtonOnClick(object sender, EventArgs eventArgs)
-        {
+        private void ButtonOnClick(object sender, EventArgs eventArgs) {
             var button = (Button)sender;
             Image Img = null;
 
             if (button.Image == null) {
-                if (n == 3) 
+                if (n == 3)
                     Img = Image.FromFile("../../src/x3.png");
 
                 if (n == 4)
@@ -88,8 +79,7 @@ namespace KresticsAndNulls {
                 button.Tag = 1;
                 button.Refresh();
                 count++;
-                if (!check())
-                {
+                if (!check()) {
                     turn = !turn;
                     System.Threading.Thread.Sleep(300);
                     bot_click();
@@ -97,13 +87,8 @@ namespace KresticsAndNulls {
             }
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void Play_Click(object sender, EventArgs e)
-        {
-            turn = true;            
+        private void Play_Click(object sender, EventArgs e) {
+            turn = true;
             int new_n = Convert.ToInt32(textBox1.Text);
 
             if ((new_n >= 3) && (new_n <= 5)) {
@@ -113,7 +98,7 @@ namespace KresticsAndNulls {
             }
             else { MessageBox.Show("Введите нормальное число!"); }
         }
-            
+
         // Логика бота
         private void bot_click() {
             Random Rand = new Random();
@@ -122,14 +107,14 @@ namespace KresticsAndNulls {
                 //MessageBox.Show();
                 int x = Rand.Next(0, n);
                 int y = Rand.Next(0, n);
-                Button but = btn[x,y];
+                Button but = btn[x, y];
 
                 if (but.Image == null) {
                     if (n == 3)
                         Img = Image.FromFile("../../src/o3.png");
 
                     if (n == 4)
-                        Img = Image.FromFile("../../src/o4.png"); 
+                        Img = Image.FromFile("../../src/o4.png");
 
                     if (n == 5)
                         Img = Image.FromFile("../../src/o5.png");
@@ -146,8 +131,7 @@ namespace KresticsAndNulls {
         }
 
         // Проверка на победу, но не работает
-        private bool check()
-        {
+        private bool check() {
             // 1 - крестик(Человек), 2 - нолик(бот) 
             bool horiz_win = check_horiz_win();
             bool vertic_win = check_vertic_win();
@@ -170,19 +154,16 @@ namespace KresticsAndNulls {
             return false;
         }
 
-        private bool check_horiz_win()
-        {
+        private bool check_horiz_win() {
             bool horiz_win = false;
             int cur_tag = -1;
-            for (int i = 0; i < n; i++)
-            {
+            for (int i = 0; i < n; i++) {
                 bool is_horiz_win = true;
                 cur_tag = (int)btn[i, 0].Tag;
                 if (cur_tag == 0)
                     continue;
                 for (int j = 1; j < n; j++)
-                    if ((int)btn[i, j].Tag != cur_tag)
-                    {
+                    if ((int)btn[i, j].Tag != cur_tag) {
                         is_horiz_win = false;
                         break;
                     }
@@ -191,19 +172,16 @@ namespace KresticsAndNulls {
             return horiz_win;
         }
 
-        private bool check_vertic_win()
-        {
+        private bool check_vertic_win() {
             bool vertic_win = false;
             int cur_tag = -1;
-            for (int i = 0; i < n; i++)
-            {
+            for (int i = 0; i < n; i++) {
                 bool is_vertic_win = true;
-                cur_tag = (int) btn[0, i].Tag;
+                cur_tag = (int)btn[0, i].Tag;
                 if (cur_tag == 0)
                     continue;
                 for (int j = 1; j < n; j++)
-                    if ((int) btn[j, i].Tag != cur_tag)
-                    {
+                    if ((int)btn[j, i].Tag != cur_tag) {
                         is_vertic_win = false;
                         break;
                     }
@@ -213,15 +191,13 @@ namespace KresticsAndNulls {
         }
 
 
-        private bool check_diag_win()
-        {
+        private bool check_diag_win() {
             bool diag_win = false;
             int cur_tag = (int)btn[0, 0].Tag;
-            if  (cur_tag != 0) {
+            if (cur_tag != 0) {
                 diag_win = true;
                 for (int i = 1; i < n; i++) {
-                    if ((int) btn[i, i].Tag != cur_tag)
-                    {
+                    if ((int)btn[i, i].Tag != cur_tag) {
                         diag_win = false;
                         break;
                     }
@@ -230,13 +206,11 @@ namespace KresticsAndNulls {
             if (diag_win)
                 return true;
 
-            cur_tag = (int)btn[0, n-1].Tag;
+            cur_tag = (int)btn[0, n - 1].Tag;
             if (cur_tag != 0) {
                 diag_win = true;
-                for (int i = 1; i < n; i++)
-                {
-                    if ((int)btn[i, n-i-1].Tag != cur_tag)
-                    {
+                for (int i = 1; i < n; i++) {
+                    if ((int)btn[i, n - i - 1].Tag != cur_tag) {
                         diag_win = false;
                         break;
                     }
